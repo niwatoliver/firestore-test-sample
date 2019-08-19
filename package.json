@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "test": "mocha --timeout=10000"
+  },
+  "dependencies": {
+    "@firebase/testing": "^0.12.0",
+    "firebase": "^6.4.0",
+    "firebase-tools": "^6.12.0",
+    "mocha": "^6.2.0"
+  }
+}

@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userID} {
+      allow read: if true
+      	;
+
+      allow update: if false
+      	;
+
+      allow create:
+        if validateName(incomingData().name)
+        && validateEmail(incomingData().email)
+        ;
+    }
+    
+    function validateName(text) {
+    	return text is string
+    	&& 4 <= text.size()
+    	&& text.size() <= 16
+    	;
+	}
+
+    function validateEmail(text) {
+    	return text is string
+    	&& 4 <= text.size()
+    	&& text.size() <= 256
+    	;
+	}
+    
+    function incomingData() {
+      return request.resource.data
+      ;
+    }
+  }
+}
